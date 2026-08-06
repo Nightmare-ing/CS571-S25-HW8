@@ -1,6 +1,6 @@
 import CS571 from "@cs571/mobile-client";
 import { useEffect, useState } from "react";
-import { Text, View } from "react-native";
+import { Text, View, ScrollView } from "react-native";
 import BadgerNewsItemCard from "../items/BadgerNewsItemCard";
 
 function BadgerNewsScreen(props) {
@@ -17,17 +17,26 @@ function BadgerNewsScreen(props) {
             });
     }, []);
     return (
-        <View>
+        <View
+            style={{
+                flex: 1,
+                justifyContent: "center",
+            }}
+        >
             {news.length === 0 ? (
-                <Text>Loading...</Text>
+                <Text style={{ textAlign: "center", fontWeight: "bold" }}>
+                    Loading...
+                </Text>
             ) : (
-                news.map((item) => (
-                    <BadgerNewsItemCard
-                        key={item.id}
-                        title={item.title}
-                        img={item.img}
-                    />
-                ))
+                <ScrollView>
+                    {news.map((item) => (
+                        <BadgerNewsItemCard
+                            key={item.id}
+                            title={item.title}
+                            img={item.img}
+                        />
+                    ))}
+                </ScrollView>
             )}
         </View>
     );
