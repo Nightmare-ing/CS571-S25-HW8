@@ -1,9 +1,14 @@
-import { Text, View } from "react-native";
+import { Text, View, Switch } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 function BadgerPreferencesScreen(props) {
-    return <View>
-        <Text style={{paddingTop: 128}}>I should put some switches here!</Text>
-    </View>
+    return (
+        <SafeAreaView>
+            <View>
+                <Switch value={true}></Switch>
+            </View>
+        </SafeAreaView>
+    );
 }
 
 export default BadgerPreferencesScreen;
