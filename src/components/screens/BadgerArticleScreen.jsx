@@ -24,12 +24,14 @@ function BadgerArticleScreen(props) {
     }, []);
 
     useEffect(() => {
-        Animated.timing(opVal.current, {
-            toValue: 1,
-            duration: 4000,
-            useNativeDriver: true,
-        }).start();
-    }, []);
+        if (articleData) {
+            Animated.timing(opVal.current, {
+                toValue: 1,
+                duration: 1000,
+                useNativeDriver: true,
+            }).start();
+        }
+    }, [articleData]);
 
     return (
         <View
