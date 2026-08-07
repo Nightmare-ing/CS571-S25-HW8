@@ -15,7 +15,7 @@ function BadgerTabs(props) {
         <BadgerTabNavigator.Navigator
             screenOptions={({ route }) => ({
                 tabBarActiveTintColor: "red",
-                headerStyle: { backgroundColor: "lightblue" },
+                headerStyle: { backgroundColor: "white" },
                 tabBarIcon: ({ focused, color, size }) => {
                     let iconName;
                     if (route.name === "News") {
@@ -39,7 +39,6 @@ function BadgerTabs(props) {
             <BadgerTabNavigator.Screen
                 name="Preferences"
                 component={BadgerPreferencesScreen}
-                options={{ headerShown: false }}
             />
         </BadgerTabNavigator.Navigator>
     );
