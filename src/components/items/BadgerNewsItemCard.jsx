@@ -1,12 +1,13 @@
 import { useNavigation } from "@react-navigation/native";
 import { Card } from "react-native-paper";
-import { Image } from "react-native-web";
 
 function BadgerNewsItemCard(props) {
     const navigation = useNavigation();
 
     const handlePress = () => {
-        navigation.navigate("Article");
+        navigation.push("Article", {
+            id: props.fullArticleId,
+        });
     };
 
     return (
