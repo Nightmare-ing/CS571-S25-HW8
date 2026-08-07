@@ -35,6 +35,7 @@ function BadgerNewsScreen(props) {
                             key={item.id}
                             title={item.title}
                             img={item.img}
+                            fullArticleId={item.fullArticleId}
                         />
                     ))}
                 </ScrollView>
