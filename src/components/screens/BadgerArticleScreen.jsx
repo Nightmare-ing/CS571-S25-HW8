@@ -1,10 +1,12 @@
 import CS571 from "@cs571/mobile-client";
-import { useEffect, useState } from "react";
-import { ScrollView, View, Image, StyleSheet } from "react-native";
+import { map } from "ionicons/icons";
+import { useEffect, useRef, useState } from "react";
+import { ScrollView, View, Image, StyleSheet, Animated } from "react-native";
 import { Text } from "react-native-paper";
 
 function BadgerArticleScreen(props) {
     const [articleData, setArticleData] = useState(null);
+    const opVal = useRef(new Animated.Value(0));
 
     useEffect(() => {
         fetch(
@@ -19,6 +21,14 @@ function BadgerArticleScreen(props) {
             .then((data) => {
                 setArticleData(data);
             });
+    }, []);
+
+    useEffect(() => {
+        Animated.timing(opVal.current, {
+            toValue: 1,
+            duration: 4000,
+            useNativeDriver: true,
+        }).start();
     }, []);
 
     return (
@@ -41,10 +51,10 @@ function BadgerArticleScreen(props) {
                             padding: "3%",
                         }}
                     >
-                        <Text variant="titleLarge" style={styles.title}>
-                            {articleData.title}
-                        </Text>
                         <View style={styles.info}>
+                            <Text variant="titleLarge" style={styles.title}>
+                                {articleData.title}
+                            </Text>
                             <Text variant="titleSmall">
                                 By {articleData.author}
                             </Text>
@@ -52,11 +62,21 @@ function BadgerArticleScreen(props) {
                                 Read full article here.
                             </Text>
                         </View>
-                        <Text variant="bodyMedium">{articleData.body[0]}</Text>
+                        <Animated.View
+                            style={{
+                                opacity: opVal.current,
+                            }}
+                        >
+                            {articleData.body.map((item, index) => (
+                                <Text key={index} variant="bodyMedium">
+                                    {item}
+                                </Text>
+                            ))}
+                        </Animated.View>
                     </View>
                 </ScrollView>
             ) : (
-                <Text style={styles.loading}>Loading...</Text>
+                <Text style={styles.loading}>The content is loading...</Text>
             )}
         </View>
     );
@@ -76,7 +96,7 @@ const styles = StyleSheet.create({
         paddingBottom: 12,
     },
     infoLink: {
-        color: "cyan",
+        color: "red",
     },
     loading: {
         textAlign: "center",
