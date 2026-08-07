@@ -16,6 +16,7 @@ function BadgerNewsScreen(props) {
                 setNews(data);
             });
     }, []);
+
     return (
         <View
             style={{

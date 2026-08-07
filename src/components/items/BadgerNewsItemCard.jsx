@@ -1,13 +1,21 @@
+import { useNavigation } from "@react-navigation/native";
 import { Card } from "react-native-paper";
 import { Image } from "react-native-web";
 
 function BadgerNewsItemCard(props) {
+    const navigation = useNavigation();
+
+    const handlePress = () => {
+        navigation.navigate("Article");
+    };
+
     return (
         <Card
             style={{
                 padding: "2%",
                 margin: "3%",
             }}
+            onPress={handlePress}
         >
             <Card.Cover
                 style={{

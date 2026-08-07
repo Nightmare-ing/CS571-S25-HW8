@@ -5,6 +5,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 import BadgerNewsScreen from "../screens/BadgerNewsScreen";
 import BadgerPreferencesScreen from "../screens/BadgerPreferencesScreen";
+import BadgerNewsStack from "./BadgerNewsStack";
 import { colorFill } from "ionicons/icons";
 
 const BadgerTabNavigator = createBottomTabNavigator();
@@ -30,7 +31,7 @@ function BadgerTabs(props) {
         >
             <BadgerTabNavigator.Screen
                 name="News"
-                component={BadgerNewsScreen}
+                component={BadgerNewsStack}
                 options={{
                     headerShown: false,
                 }}
