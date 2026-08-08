@@ -12,7 +12,7 @@ function Option(props) {
             }}
         >
             <Text style={{ padding: 4 }}>
-                Currently showing
+                Currently{props.value ? " " : " NOT "}showing
                 <Text style={{ fontWeight: "bold" }}> {props.pref} </Text>{" "}
                 articles
             </Text>
@@ -20,7 +20,7 @@ function Option(props) {
                 <Switch
                     value={props.value}
                     trackColor={{ false: "#E5E5EA", true: "#fcc5b6" }}
-                    thumbColor={"red"}
+                    thumbColor={props.value ? "red" : "#E5E5EA"}
                     ios_backgroundColor={"#E5E5EA"}
                     onValueChange={(newValue) => props.onChange(props.pref)}
                 />
