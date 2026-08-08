@@ -1,7 +1,13 @@
 import CS571 from "@cs571/mobile-client";
-import { map } from "ionicons/icons";
 import { useEffect, useRef, useState } from "react";
-import { ScrollView, View, Image, StyleSheet, Animated } from "react-native";
+import {
+    ScrollView,
+    View,
+    Image,
+    StyleSheet,
+    Animated,
+    Linking,
+} from "react-native";
 import { Text } from "react-native-paper";
 
 function BadgerArticleScreen(props) {
@@ -33,6 +39,15 @@ function BadgerArticleScreen(props) {
         }
     }, [articleData]);
 
+    async function openURL(url) {
+        const supported = await Linking.canOpenURL(url);
+        if (supported) {
+            await Linking.openURL(url);
+        } else {
+            Alert.alert(`Don't know how to open URL: ${url}`);
+        }
+    }
+
     return (
         <View
             style={{
@@ -60,7 +75,13 @@ function BadgerArticleScreen(props) {
                             <Text variant="titleSmall">
                                 By {articleData.author}
                             </Text>
-                            <Text variant="bodyMedium" style={styles.infoLink}>
+                            <Text
+                                variant="bodyMedium"
+                                style={styles.infoLink}
+                                onPress={(e) => {
+                                    openURL(articleData.url);
+                                }}
+                            >
                                 Read full article here.
                             </Text>
                         </View>
