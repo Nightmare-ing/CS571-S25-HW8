@@ -15,21 +15,22 @@ function BadgerNewsScreen(props) {
         }
         return true;
     });
-    // console.log("News: ", news);
-    // console.log(filteredNews);
 
-    return (
-        <View
-            style={{
-                flex: 1,
-                justifyContent: "center",
-            }}
-        >
-            {filteredNews.length === 0 ? (
+    function contents() {
+        if (news.length === 0) {
+            return (
                 <Text style={{ textAlign: "center", fontWeight: "bold" }}>
                     Loading...
                 </Text>
-            ) : (
+            );
+        } else if (filteredNews.length === 0) {
+            return (
+                <Text style={{ textAlign: "center", fontWeight: "bold" }}>
+                    No news meet your preference settings...
+                </Text>
+            );
+        } else {
+            return (
                 <ScrollView>
                     {filteredNews.map((item) => (
                         <BadgerNewsItemCard
@@ -40,7 +41,18 @@ function BadgerNewsScreen(props) {
                         />
                     ))}
                 </ScrollView>
-            )}
+            );
+        }
+    }
+
+    return (
+        <View
+            style={{
+                flex: 1,
+                justifyContent: "center",
+            }}
+        >
+            {contents()}
         </View>
     );
 }
