@@ -9,11 +9,11 @@ function BadgerNewsScreen(props) {
     const onPrefs = Object.keys(prefs).filter((key) => prefs[key]);
     const filteredNews = news.filter((item) => {
         for (const tag of item.tags) {
-            if (onPrefs.includes(tag)) {
-                return true;
+            if (!onPrefs.includes(tag)) {
+                return false;
             }
         }
-        return false;
+        return true;
     });
     // console.log("News: ", news);
     // console.log(filteredNews);
