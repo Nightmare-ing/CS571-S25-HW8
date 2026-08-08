@@ -5,13 +5,23 @@ import { useContext } from "react";
 import NewsContext from "../contexts/NewsContext";
 
 function BadgerPreferencesScreen(props) {
-    const { prefs } = useContext(NewsContext);
+    const { prefs, setPrefs } = useContext(NewsContext);
+
+    function changeVal(pref) {
+        prefs[pref] = !prefs[pref];
+        setPrefs({ ...prefs });
+    }
 
     return (
         <SafeAreaView>
             <ScrollView style={{ padding: 12 }}>
-                {prefs.map((pref, index) => (
-                    <Option key={index} pref={pref} />
+                {Object.keys(prefs).map((key, index) => (
+                    <Option
+                        key={index}
+                        pref={key}
+                        value={prefs[key]}
+                        onChange={changeVal}
+                    />
                 ))}
             </ScrollView>
         </SafeAreaView>

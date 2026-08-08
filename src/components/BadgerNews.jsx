@@ -20,18 +20,23 @@ export default function BadgerNews(props) {
             .then((data) => {
                 setNews(data);
 
-                let tagLists = [];
+                let tagList = [];
                 for (const item of data) {
-                    tagLists = [...tagLists, ...item.tags];
+                    tagList = [...tagList, ...item.tags];
                 }
-                setPrefs([...new Set(tagLists)]);
+                const uniqueTagList = [...new Set(tagList)];
+                const prefsDict = {};
+                for (const tag of uniqueTagList) {
+                    prefsDict[tag] = true;
+                }
+                setPrefs(prefsDict);
             });
     }, []);
 
     return (
         <>
             <NavigationContainer>
-                <NewsContext.Provider value={{ prefs, news }}>
+                <NewsContext.Provider value={{ prefs, setPrefs, news }}>
                     <BadgerTabs />
                 </NewsContext.Provider>
             </NavigationContainer>

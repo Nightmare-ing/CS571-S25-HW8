@@ -6,17 +6,17 @@ import NewsContext from "../contexts/NewsContext";
 
 function BadgerNewsScreen(props) {
     const { prefs, news } = useContext(NewsContext);
+    const onPrefs = Object.keys(prefs).filter((key) => prefs[key]);
     const filteredNews = news.filter((item) => {
         for (const tag of item.tags) {
-            if (prefs.includes(tag)) {
+            if (onPrefs.includes(tag)) {
                 return true;
             }
         }
         return false;
     });
-    // console.log("Prefs: ", prefs);
     // console.log("News: ", news);
-    console.log(filteredNews);
+    // console.log(filteredNews);
 
     return (
         <View
